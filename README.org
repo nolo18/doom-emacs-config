@@ -1,0 +1,13 @@
+#+TITLE:   Personal Emacs Doom Configuration
+#+DATE:    agosto 23, 2021
+#+SINCE:   <replace with next tagged release version>
+#+STARTUP: inlineimages nofold
+
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+
+* Description
+After a long time using vanilla emacs configuration, my configuration becomes bloated and slow.
+
+Taking this way at first, I mostly feel comfortable and with enough knoledge to configure doom-emacs
+on my own.
