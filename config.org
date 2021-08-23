@@ -10,7 +10,7 @@
   - [[#doom-themes][Doom-themes]]
   - [[#doom-modeline][Doom-modeline]]
   - [[#fonts][Fonts]]
-- [[#tasks-16][Tasks]]
+- [[#tasks-17][Tasks]]
 
 * doom bootstrap
 
@@ -37,8 +37,7 @@ I don't want line numbers in some modes.
 #+begin_src emacs-lisp
 ;; TODO: This not working.
 
-(after! 'org
-       (remove-hook 'org-mode-hook 'display-line-numbers))
+(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0)))
 #+end_src
 
 
@@ -100,7 +99,7 @@ Maybe I want modeline be smaller I found this on its github page.
 
 #+end_src
 
-* TODO Tasks [1/6]
+* TODO Tasks [1/7]
 - [-] Organize this file [1/2]
   + [ ] Set up all labels in the heading.
   + [X] Maybe create a table of content.
@@ -108,7 +107,7 @@ Maybe I want modeline be smaller I found this on its github page.
 - [-] Org [0/4]
   + [ ] Get bigger headlines size
   + [ ] Install org-bullets
-  + [-] Take a look org-mode-hook and remove some hooks. I need to find the way to acomplish this.
+  + [X] Disable line-numbers in org-mode
   + [ ] Configure org-variables (org-hide-emphasis-makers & friends)
 - [-] Doom-Modeline [0/2]
   + [-] Set smaller size
@@ -116,3 +115,4 @@ Maybe I want modeline be smaller I found this on its github page.
 - [X] Doom-themes [1/1]
   + [X] Configure doom-themes variables
 - [ ] Doom big font mode doesn't work
+- [ ] Maybe will be a good idea to store personal data in a separate file and load it.
