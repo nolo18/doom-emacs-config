@@ -18,8 +18,12 @@ Personal information for file templates and snippets
  + `doom-big-font' -- used for `doom-big-font-mode'; use this for
    presentations or streaming.
 
+   _Note:_ enabling bold and italics font was made via [[Doom-themes][Doom-themes]] configuration.
+
  #+begin_src emacs-lisp
-(setq doom-font "DejaVuSansMono Nerd Font 11")
+(setq doom-font "DejaVuSansMono Nerd Font 11"
+      doom-variable-pitch-font "DejaVuSansMono Nerd Font 11"
+      doom-big-font "DejaVuSansMono Nerd Font 18")
  #+end_src
 
 ** Set up theme
@@ -37,13 +41,46 @@ If you use `org' and don't want your org files in the default location below,
 change `org-directory'. It must be set before org loads!
 =(setq org-directory "~/org/"=
 
+* Doom-themes
 
-* doom-modeline
-I want to configure some aspects of doom modeline.
+[[https://github.com/hlissner/emacs-doom-themes][doom-themes]] has a lot of configuration options. Some of them are no obvious.
 
 #+begin_src emacs-lisp
-(use-package! doom-modeline
-  :init
-  (setq doom-modeline-major-mode-icon t
-        doom-modeline-major-mode-color-icon t))
+(after! 'doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italics t))
 #+end_src
+
+* Doom-modeline
+I want to configure some aspects of doom modeline.
+
+Maybe I want modeline be smaller I found this on its github page.
+#+begin_comment
+(setq doom-modeline-height 1)
+(set-face-attribute 'mode-line nil :family "Noto Sans" :height 100)
+(set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 100)
+#+end_comment
+
+
+#+begin_src emacs-lisp
+(after! doom-modeline
+  (setq doom-modeline-major-mode-icon t
+        doom-modeline-major-mode-color-icon t
+        doom-modeline-height 20))
+#+end_src
+
+* TODO Tasks [0/5]
+- [ ] Organize this file [0/2]
+  + [ ] Set up all labels in the heading.
+  + [ ] Maybe create a table of content.
+- [ ] Set all doom fonts correctly.
+- [ ] Org [0/4]
+  + [ ] Get bigger headlines size
+  + [ ] Install org-bullets
+  + [ ] Take a look org-mode-hook and remove some hooks
+  + [ ] Configure org-variables (org-hide-emphasis-makers & friends)
+- [ ] Doom-Modeline [0/2]
+  + [-] Set smaller size
+  + [ ] Get rid about flycheck icon when not running.
+- [X] Doom-themes [1/1]
+  + [X] Configure doom-themes variables
