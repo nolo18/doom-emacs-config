@@ -1,7 +1,12 @@
 #+TITLE: Doom personal configuration
+#+AUTHOR: nolo18
+#+EMAIL: nolo18@khelnet.xyz
+#+DESCRIPTION: Personal configuration layer on top of Doom-emacs defaults.
+#+STARTUP: showall
 
-* Contents :TOC_3:noexport:
-- [[#doom-bootstrap][doom bootstrap]]
+
+* Contents :TOC_2:noexport:
+- [[#doom-bootstrap][Doom bootstrap]]
   - [[#personal-data][Personal data]]
   - [[#set-up-theme][Set up theme]]
   - [[#line-numbers][Line numbers]]
@@ -10,9 +15,10 @@
   - [[#doom-themes][Doom-themes]]
   - [[#doom-modeline][Doom-modeline]]
   - [[#fonts][Fonts]]
+  - [[#org-appareance][Org appareance]]
 - [[#tasks-17][Tasks]]
 
-* doom bootstrap
+* Doom bootstrap
 
 ** Personal data
 Personal information for file templates and snippets
@@ -53,7 +59,7 @@ change `org-directory'. It must be set before org loads!
 [[https://github.com/hlissner/emacs-doom-themes][doom-themes]] has a lot of configuration options. Some of them are no obvious.
 
 #+begin_src emacs-lisp
-(after! 'doom-themes
+(after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italics t))
 #+end_src
@@ -61,21 +67,11 @@ change `org-directory'. It must be set before org loads!
 ** Doom-modeline
 I want to configure some aspects of doom modeline.
 
-Maybe I want modeline be smaller I found this on its github page.
-#+begin_comment
-(setq doom-modeline-height 1)
-(set-face-attribute 'mode-line nil :family "Noto Sans" :height 100)
-(set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 100)
-#+end_comment
-
-
 #+begin_src emacs-lisp
-(after! doom-modeline
+(after! (doom-modeline doom-themes)
   (setq doom-modeline-major-mode-icon t
         doom-modeline-major-mode-color-icon t
-        doom-modeline-height 1)
-  (set-face-attribute 'mode-line nil :height 95)
-  (set-face-attribute 'mode-line-inactive nil :height 95))
+        doom-modeline-height 1))
 #+end_src
 
 ** Fonts
@@ -93,10 +89,39 @@ Maybe I want modeline be smaller I found this on its github page.
 (setq doom-font "DejaVuSansMono Nerd Font Mono 11"
       doom-variable-pitch-font "DejaVuSansMono Nerd Font Mono 11"
       doom-big-font "DejaVuSansMono Nerd Font Mono 18")
+#+end_src
 
-;; TODO: Comments doesn't shows in italics
-(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+** Org appareance
 
+Use org-bullets to change stars for a clean rounded circle.
+
+#+begin_src emacs-lisp
+(use-package! org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :config
+  (setq org-bullets-bullet-list '("◉"))
+  )
+#+end_src
+
+After load org, I want to make some tweaks to org apareance:
++ Make headlines from level 1 to 4 bigger than normal text.
++ Change org-ellipsis for anything more visual than 3 dots.
++ Hide emphasis markers to make more readable the text.
+
+#+begin_src emacs-lisp
+(after! org
+  (set-face-attribute 'org-document-title nil :height 1.6)
+  (set-face-attribute 'org-level-1 nil :height 1.4)
+  (set-face-attribute 'org-level-2 nil :height 1.3)
+  (set-face-attribute 'org-level-3 nil :height 1.2)
+  (set-face-attribute 'org-level-4 nil :height 1.1)
+
+  ;; hide emphasis markers
+  (setq org-hide-emphasis-markers t)
+
+  ;; set org ellipsis for something more visual
+  (setq org-ellipsis "⬎"))
 #+end_src
 
 * TODO Tasks [1/7]
@@ -104,12 +129,12 @@ Maybe I want modeline be smaller I found this on its github page.
   + [ ] Set up all labels in the heading.
   + [X] Maybe create a table of content.
 - [ ] Set all doom fonts correctly.
-- [-] Org [0/4]
-  + [ ] Get bigger headlines size
-  + [ ] Install org-bullets
+- [-] Org [3/4]
+  + [X] Get bigger headlines size
+  + [X] Install org-bullets
   + [X] Disable line-numbers in org-mode
-  + [ ] Configure org-variables (org-hide-emphasis-makers & friends)
-- [-] Doom-Modeline [0/2]
+  + [-] Configure org-variables (org-hide-emphasis-makers & friends)
+- [-] Doom-Modeline [1/2]
   + [-] Set smaller size
   + [ ] Get rid about flycheck icon when not running.
 - [X] Doom-themes [1/1]
