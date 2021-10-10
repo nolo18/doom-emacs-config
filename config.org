@@ -7,6 +7,7 @@
 
 * Contents :TOC_2:noexport:
 - [[#doom-bootstrap][Doom bootstrap]]
+  - [[#lexican-binding][Lexican binding]]
   - [[#personal-data][Personal data]]
   - [[#set-up-theme][Set up theme]]
   - [[#line-numbers][Line numbers]]
@@ -19,6 +20,13 @@
 - [[#tasks-17][Tasks]]
 
 * Doom bootstrap
+
+** Lexican binding
+I found an error with doom variables if lexical-binding is not define
+
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
 
 ** Personal data
 Personal information for file templates and snippets
@@ -50,7 +58,14 @@ I don't want line numbers in some modes.
 ** Org directory
 If you use `org' and don't want your org files in the default location below,
 change `org-directory'. It must be set before org loads!
-=(setq org-directory "~/org/"=
+
+#+begin_src emacs-lisp
+(if (file-directory-p "/mnt/NASshare/org")
+    (setq org-directory "/mnt/NASshare/org"
+          org-agenda-files (list org-directory))
+  (setq org-directory nil))
+#+end_src
+
 
 * UI Configuration
 
@@ -86,9 +101,9 @@ I want to configure some aspects of doom modeline.
    _Note:_ enabling bold and italics font was made via [[Doom-themes][Doom-themes]] configuration.
 
  #+begin_src emacs-lisp
-(setq doom-font "DejaVuSansMono Nerd Font Mono 11"
-      doom-variable-pitch-font "DejaVuSansMono Nerd Font Mono 11"
-      doom-big-font "DejaVuSansMono Nerd Font Mono 18")
+(setq doom-font "SauceCodePro Nerd Font Mono 11"
+      doom-variable-pitch-font "SauceCodePro Nerd Font Mono 11"
+      doom-big-font "SauceCodePro Nerd Font Mono 17")
 #+end_src
 
 ** Org appareance
@@ -108,6 +123,7 @@ After load org, I want to make some tweaks to org apareance:
 + Make headlines from level 1 to 4 bigger than normal text.
 + Change org-ellipsis for anything more visual than 3 dots.
 + Hide emphasis markers to make more readable the text.
++ Positioning tags at the right.
 
 #+begin_src emacs-lisp
 (after! org
@@ -121,7 +137,11 @@ After load org, I want to make some tweaks to org apareance:
   (setq org-hide-emphasis-markers t)
 
   ;; set org ellipsis for something more visual
-  (setq org-ellipsis "⬎"))
+  (setq org-ellipsis "⬎")
+
+  ;; Positioning tags at the right
+  (setq org-tags-column -77))
+
 #+end_src
 
 * TODO Tasks [1/7]
