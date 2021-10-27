@@ -11,12 +11,14 @@
   - [[#personal-data][Personal data]]
   - [[#set-up-theme][Set up theme]]
   - [[#line-numbers][Line numbers]]
-  - [[#org-directory][Org directory]]
 - [[#ui-configuration][UI Configuration]]
   - [[#doom-themes][Doom-themes]]
   - [[#doom-modeline][Doom-modeline]]
   - [[#fonts][Fonts]]
+- [[#org-mode][Org-mode]]
   - [[#org-appareance][Org appareance]]
+  - [[#org-directory][Org directory]]
+  - [[#org-mode-hook][Org-mode hook]]
 - [[#tasks-17][Tasks]]
 
 * Doom bootstrap
@@ -44,26 +46,6 @@ Personal information for file templates and snippets
 
 #+begin_src emacs-lisp
 (setq display-line-numbers-type t)
-#+end_src
-
-I don't want line numbers in some modes.
-
-#+begin_src emacs-lisp
-;; TODO: This not working.
-
-(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0)))
-#+end_src
-
-
-** Org directory
-If you use `org' and don't want your org files in the default location below,
-change `org-directory'. It must be set before org loads!
-
-#+begin_src emacs-lisp
-(if (file-directory-p "/mnt/NASshare/org")
-    (setq org-directory "/mnt/NASshare/org"
-          org-agenda-files (list org-directory))
-  (setq org-directory nil))
 #+end_src
 
 
@@ -103,8 +85,10 @@ I want to configure some aspects of doom modeline.
  #+begin_src emacs-lisp
 (setq doom-font "SauceCodePro Nerd Font Mono 11"
       doom-variable-pitch-font "SauceCodePro Nerd Font Mono 11"
-      doom-big-font "SauceCodePro Nerd Font Mono 17")
+      doom-big-font "SauceCodePro Nerd Font Mono 11")
 #+end_src
+
+* Org-mode
 
 ** Org appareance
 
@@ -142,6 +126,31 @@ After load org, I want to make some tweaks to org apareance:
   ;; Positioning tags at the right
   (setq org-tags-column -77))
 
+#+end_src
+
+** Org directory
+If you use `org' and don't want your org files in the default location below,
+change `org-directory'. It must be set before org loads!
+
+#+begin_src emacs-lisp
+(if (file-directory-p "/mnt/NASshare/org")
+    (setq org-directory "/mnt/NASshare/org"
+          org-agenda-files (list org-directory))
+  (setq org-directory nil))
+#+end_src
+
+
+** Org-mode hook
+
+Doom apply some minor modes globally. Some of them has no sense in orgmode. So It will be necesary to make a custom function to disable or enable some predefined stuff in doom.
+
+#+begin_src emacs-lisp
+;;(defun nolo18/org-mode-hook ()
+;;  (progn
+;;    (display-line-numbers-mode 0)
+;;    (flycheck-mode nil)))
+
+(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0) (flycheck-mode 0)))
 #+end_src
 
 * TODO Tasks [1/7]
