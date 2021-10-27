@@ -19,7 +19,11 @@
   - [[#org-appareance][Org appareance]]
   - [[#org-directory][Org directory]]
   - [[#org-mode-hook][Org-mode hook]]
-- [[#tasks-17][Tasks]]
+- [[#keybindings][Keybindings]]
+  - [[#smartparens][smartparens]]
+- [[#need-to-be-moved][Need to be moved]]
+  - [[#smartparens-strict-mode][smartparens strict mode]]
+- [[#tasks-00][Tasks]]
 
 * Doom bootstrap
 
@@ -153,20 +157,41 @@ Doom apply some minor modes globally. Some of them has no sense in orgmode. So I
 (add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0) (flycheck-mode 0)))
 #+end_src
 
-* TODO Tasks [1/7]
-- [-] Organize this file [1/2]
-  + [ ] Set up all labels in the heading.
-  + [X] Maybe create a table of content.
-- [ ] Set all doom fonts correctly.
-- [-] Org [3/4]
-  + [X] Get bigger headlines size
-  + [X] Install org-bullets
-  + [X] Disable line-numbers in org-mode
-  + [-] Configure org-variables (org-hide-emphasis-makers & friends)
-- [-] Doom-Modeline [1/2]
-  + [-] Set smaller size
-  + [ ] Get rid about flycheck icon when not running.
-- [X] Doom-themes [1/1]
-  + [X] Configure doom-themes variables
-- [ ] Doom big font mode doesn't work
-- [ ] Maybe will be a good idea to store personal data in a separate file and load it.
+
+
+* Keybindings
+
+Some global preconfigured keys which i don't ever use, disturb some personal preferences, so I better disable them.
+
+#+begin_src emacs-lisp
+(global-unset-key (kbd "<C-right>"))
+(global-unset-key (kbd "<C-left>"))
+(global-unset-key (kbd "<C-M-right>"))
+(global-unset-key (kbd "<C-M-left>"))
+#+end_src
+
+** smartparens
+Some interesting functions for smartparens has no defined keybinding. I'm going to change that.
+
+#+begin_src emacs-lisp
+(define-key smartparens-mode-map (kbd "<C-right>") 'sp-forward-slurp-sexp)
+(define-key smartparens-mode-map (kbd "<C-left>") 'sp-forward-barf-sexp)
+(define-key smartparens-mode-map (kbd "<C-M-right>") 'sp-backward-slurp-sexp)
+(define-key smartparens-mode-map (kbd "<C-M-left>") 'sp-backward-barf-sexp)
+#+end_src
+
+
+* TODO Need to be moved
+Some configurations which I don't really know where to put.
+
+** smartparens strict mode
+I like to have smartparens strict mode in all lisp type of languages.
+
+#+begin_src emacs-lisp
+(add-hook! '(lisp-mode-hook
+             emacs-lisp-mode-hook
+             sly-mrepl-mode-hook
+             lisp-interaction-mode) 'smartparens-strict-mode)
+#+end_src
+
+* TODO Tasks [0/0]
