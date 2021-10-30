@@ -87,9 +87,9 @@ I want to configure some aspects of doom modeline.
    _Note:_ enabling bold and italics font was made via [[Doom-themes][Doom-themes]] configuration.
 
  #+begin_src emacs-lisp
-(setq doom-font "SauceCodePro Nerd Font Mono 11"
-      doom-variable-pitch-font "SauceCodePro Nerd Font Mono 11"
-      doom-big-font "SauceCodePro Nerd Font Mono 11")
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "SauceCodePro Nerd Font Mono")
+      doom-big-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 18 :weight 'regular))
 #+end_src
 
 * Org-mode
