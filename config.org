@@ -65,6 +65,14 @@ Personal information for file templates and snippets
         doom-themes-enable-italics t))
 #+end_src
 
+Matching pair highlight is not easy to see. Customization using =custom-set-face!= doom macro for avoiding load order issues
+
+#+begin_src emacs-lisp
+(custom-set-faces!
+  '(show-paren-match :inverse-video t))
+#+end_src
+
+
 ** Doom-modeline
 I want to configure some aspects of doom modeline.
 
