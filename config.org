@@ -111,7 +111,7 @@ Use org-bullets to change stars for a clean rounded circle.
   :after org
   :hook (org-mode . org-bullets-mode)
   :config
-  (setq org-bullets-bullet-list '("◉"))
+  (setq org-bullets-bullet-list '("◉" "○"))
   )
 #+end_src
 
